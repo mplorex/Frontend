@@ -16,7 +16,7 @@ import { RouterLink, RouterView } from "vue-router";
       <div class="wrapper">
         <nav>
           <div class="routerLink"><RouterLink to="/">Home</RouterLink></div>
-          <div class="routerLink"><RouterLink to="/Login-Signup" v-on:click.native="logout()">Login or Signup</RouterLink></div>
+          <div class="routerLink"><RouterLink to="/Login-Signup" v-on:click.native="logout">Login or Signup</RouterLink></div>
         </nav>
       </div>
     </header>
@@ -27,7 +27,7 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   name: 'App',
-  info() {
+  data() {
     return {
       authenticated: false,
       mockAccount: {

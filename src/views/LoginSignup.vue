@@ -1,45 +1,36 @@
 <template>
-<div class="login" id="login">
-    <div class="logForm"><form @submit.prevent="createUser">
-        <h1> Sign in </h1>
-        <div class="login_layout" v-for="(user, index) in users" :key="index">
-            <User :email="user.email" :password="user.password"></User>
-            <input class="field" type="email" name="email" v-model="input.email" placeholder="Email" />
-            <input class="field" type="password" name="password" v-model="input.password" placeholder="Password" />
-            <button type="submit" class="field btn" v-on:click="login">Sign in</button>
+    <div class="login" id="login">
+        <div v-if="showLogin" class="logForm">
+            <Login :user-login="userLogin"></Login>
+            <button @click="showLogin">Login</button>
         </div>
-        
-    </form></div>
-    <div  class="logForm"><form>
-        <h1> Sign up </h1>
-        <div class="login_layout" v-for="(user, index) in users" :key="index">
-            <User :email="user.email" :password="user.password" :fullName="user.fullName"></User>
-            <input class="field" type="email" name="email" v-model="input.email" placeholder="Email" />
-            <input class="field" type="password" name="password" v-model="input.password" placeholder="Password"/>
-            <input class="field" type="text" name="fullName" v-model="input.fullName" placeholder="Full name"/>
-            <button type="submit" class="field btn" v-on:click="signup()"> Sign up</button>
+        <div v-else class="logForm">
+            <Signup :user-signup="userSignup"></Signup>
+            <button @click="showLogin">Signup</button>
         </div>
-    </form></div>
-</div>
+    </div>
 </template>
 
 <script>
-import User from '../components/User.vue';
+import Login from '../components/Login.vue';
+import Signup from '../components/Signup.vue'
 
 export default {
     name: 'App',
     components:{
-        User,
+        Login,
+        Signup
     },
-    info: () => ({
-        id: '',
-        password: '',
-        email: '',
-        fullName: '',
-        users: [
-        ]
+    data: () => ({
+        showLogin: true
     }),
     methods: {
+        userLogin () {
+            this.$router.push('/')
+        },
+        userSignup () {
+            this.showLogin = true
+        },
         login() {
                 if(this.input.email != "" && this.input.password != "") {
                     if(this.input.email == this.$parent.mockAccount.email && this.input.password == this.$parent.mockAccount.password) {
@@ -52,7 +43,7 @@ export default {
             }
         },
         signup() {
-                if(this.input.email != "" && this.input.password != "" && this.input.password != "") {
+                if(this.input.email != "" && this.input.password != "" && this.input.fullName != "") {
                     if(this.input.email == this.$parent.mockAccount.email && this.input.password == this.$parent.mockAccount.password && this.input.fullName == this.$parent.mockAccount.fullName) {
                     } else {
                         console.log("Email/Pasword incorrect")
