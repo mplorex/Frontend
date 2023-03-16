@@ -16,7 +16,7 @@ import { RouterLink, RouterView } from "vue-router";
       <div class="wrapper">
         <nav>
           <div class="routerLink"><RouterLink to="/">Home</RouterLink></div>
-          <div class="routerLink"><RouterLink to="/Login-Signup" v-on:click.native="logout">Login or Signup</RouterLink></div>
+          <div class="routerLink"><RouterLink to="/LoginSignup" v-on:click.native="logout" replace>Login or Signup</RouterLink></div>
         </nav>
       </div>
     </header>
@@ -35,12 +35,6 @@ export default {
         password: ""
       }
     }
-  },
-  mounted() {
-    if(!this.authenticated) {
-      this.$router.replace({ name: "Login-Signup"})
-    }
-
   },
   methods: {
     setAuthenticated(status) {

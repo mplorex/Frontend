@@ -34,6 +34,7 @@ export default {
         login() {
                 if(this.input.email != "" && this.input.password != "") {
                     if(this.input.email == this.$parent.mockAccount.email && this.input.password == this.$parent.mockAccount.password) {
+                        this.$emit("authenticated", true);
                     } else {
                         console.log("Email/Pasword incorrect")
                     }
