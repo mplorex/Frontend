@@ -1,17 +1,16 @@
 <template>
     <div class="login" id="login">
-        <div v-if="showLogin" class="logForm">
+        <div class="logForm">
             <Login :user-login="userLogin"></Login>
-            <button @click="showLogin">Login</button>
         </div>
-        <div v-else class="logForm">
+        <div class="logForm">
             <Signup :user-signup="userSignup"></Signup>
-            <button @click="showLogin">Signup</button>
         </div>
     </div>
 </template>
 
 <script>
+
 import Login from '../components/Login.vue';
 import Signup from '../components/Signup.vue'
 
@@ -21,15 +20,20 @@ export default {
         Login,
         Signup
     },
-    data: () => ({
-        showLogin: true
-    }),
+    data () {
+        return {
+            id: '',
+            email: '',
+            password: '',
+            fullName: ''
+        }
+    },
     methods: {
         userLogin () {
             this.$router.push('/')
         },
         userSignup () {
-            this.showLogin = true
+            this.$router.push('/')
         },
         login() {
                 if(this.input.email != "" && this.input.password != "") {
@@ -44,7 +48,7 @@ export default {
             }
         },
         signup() {
-                if(this.input.email != "" && this.input.password != "" && this.input.fullName != "") {
+                if(this.input.email != "" && this.input.password != "" && this.input.fullName != "" && this.input.id != "") {
                     if(this.input.email == this.$parent.mockAccount.email && this.input.password == this.$parent.mockAccount.password && this.input.fullName == this.$parent.mockAccount.fullName) {
                     } else {
                         console.log("Email/Pasword incorrect")
@@ -58,10 +62,12 @@ export default {
             email: this.email,
             password: this.password,
             fullName: this.fullName,
+            id: this.id
         })
             this.email = ''
             this.password = ''
             this.fullName = ''
+            this.id = ''
         },
         submit: function (event) {
             let userInfo =[];
@@ -74,7 +80,7 @@ export default {
 		        headers: {
 		            'Content-Type': 'application/json'
 	            },
-	            info: JSON.stringify({
+	            body: JSON.stringify({
 		            id: this.id,
 		            name: this.fullName,
                     password: this.password,
@@ -86,7 +92,7 @@ export default {
 		        headers: {
 		            'Content-Type': 'application/json'
 	            },
-	            info: JSON.stringify({
+	            body: JSON.stringify({
 		            id: this.id,
 		            name: this.fullName,
                     password: this.password,

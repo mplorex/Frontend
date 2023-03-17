@@ -36,7 +36,6 @@ export default {
   },
   
   data: () => ({
-    showLogin: true,
     title: '',
     body: '',
     image: '',

@@ -48,7 +48,7 @@ export default {
             if (this.$refs.form.checkValidity()) {
                 let userInfo = localStorage.getItem('userInfo')
                 if (userInfo) {
-                    userInfo = JSON.parse(userInfo)
+                    userInfo = JSON.stringify(userInfo)
                 } else {
                     return
                 }
@@ -56,7 +56,7 @@ export default {
                 const formData = new FormData(this.$refs.form)
 
                 fetch('http://localhost:3000/api/posts/', {
-                    mode: 'POST',
+                    method: 'POST',
                     headers: {
                         'Authorization': 'Bearer' + userInfo.token
                     },

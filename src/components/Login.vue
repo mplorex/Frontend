@@ -34,20 +34,25 @@ export default {
     data () {
         return {
             email: '',
-            password: ''
+            password: '',
+            fullName: '',
+            id: ''
         }
     },
     methods: {
         createUser () {
             if (this.$refs.form.checkValidity()) {
                 fetch('http://localhost:3000/api/auth/login/', {
-                    mode: 'POST',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         email: this.email,
-                        password: this.password
+                        password: this.password,
+                        fullName: this.fullName,
+                        id: this.id
+
                     })
                 })
                 .then(response => {

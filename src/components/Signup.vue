@@ -1,6 +1,6 @@
 <template>
     <form ref="form" @submit.prevent="userSignup">
-        <h1>Sign in</h1>
+        <h1>Sign up</h1>
         <div class="login_layout">
             <input
             class="field"
@@ -43,21 +43,23 @@ export default {
         return {
             email: '',
             password: '',
-            fullName: ''
+            fullName: '',
+            id: ''
         }
     },
     methods: {
         userSignup () {
             if (this.$refs.form.checkValidity()) {
                 fetch('http://localhost:3000/api/auth/signup/', {
-                    mode: 'POST',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         email: this.email,
                         password: this.password,
-                        fullName: this.fullName
+                        fullName: this.fullName,
+                        id: this.id
                     })
                 })
                 .then(response => {
