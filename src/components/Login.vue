@@ -35,23 +35,29 @@ export default {
         return {
             email: '',
             password: '',
-            fullName: '',
-            id: ''
+            fullName: ''
         }
     },
     methods: {
         createUser () {
             if (this.$refs.form.checkValidity()) {
+                let userInfo = localStorage.getItem('userInfo')
+                if (userInfo) {
+                    userInfo = JSON.stringify(userInfo)
+                } else {
+                    return
+                }
+
                 fetch('http://localhost:3000/api/auth/login/', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer' + userInfo.token
                     },
                     body: JSON.stringify({
                         email: this.email,
                         password: this.password,
-                        fullName: this.fullName,
-                        id: this.id
+                        fullName: this.fullName
 
                     })
                 })

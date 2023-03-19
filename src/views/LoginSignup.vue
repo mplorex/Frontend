@@ -22,7 +22,6 @@ export default {
     },
     data () {
         return {
-            id: '',
             email: '',
             password: '',
             fullName: ''
@@ -61,13 +60,11 @@ export default {
             this.users.unshift({
             email: this.email,
             password: this.password,
-            fullName: this.fullName,
-            id: this.id
+            fullName: this.fullName
         })
             this.email = ''
             this.password = ''
             this.fullName = ''
-            this.id = ''
         },
         submit: function (event) {
             let userInfo =[];
@@ -93,7 +90,6 @@ export default {
 		            'Content-Type': 'application/json'
 	            },
 	            body: JSON.stringify({
-		            id: this.id,
 		            name: this.fullName,
                     password: this.password,
                     email: this.email

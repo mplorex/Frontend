@@ -31,7 +31,7 @@
             type="submit"
             class="field btn"
             >
-                Sign in
+                Sign up
             </button>
         </div>
     </form>
@@ -43,34 +43,43 @@ export default {
         return {
             email: '',
             password: '',
-            fullName: '',
-            id: ''
+            fullName: ''
         }
     },
     methods: {
         userSignup () {
             if (this.$refs.form.checkValidity()) {
+                let userInfo = localStorage.getItem('userInfo')
+                if (userInfo) {
+                    userInfo = JSON.stringify(userInfo)
+                } else {
+                    return
+                }
                 fetch('http://localhost:3000/api/auth/signup/', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer' + userInfo.token
                     },
                     body: JSON.stringify({
                         email: this.email,
                         password: this.password,
-                        fullName: this.fullName,
-                        id: this.id
+                        fullName: this.fullName
                     })
                 })
+
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     }
                 })
+
                 .then(data => {
                     localStorage.setItem('userInfo', data)
+                    localStorage.setItem('', userInfo.token)
                     this.$emit('user-signup', true)
                 })
+
             }
         }
     }
