@@ -49,7 +49,8 @@ export default {
     methods: {
         userSignup () {
             if (this.$refs.form.checkValidity()) {
-                let userInfo = localStorage.getItem('userInfo')
+                let userInfo = localStorage.getItem("userInfo")
+
                 if (userInfo) {
                     userInfo = JSON.stringify(userInfo)
                 } else {
@@ -64,7 +65,8 @@ export default {
                     body: JSON.stringify({
                         email: this.email,
                         password: this.password,
-                        fullName: this.fullName
+                        fullName: this.fullName,
+                        id: this.id
                     })
                 })
 
@@ -76,10 +78,8 @@ export default {
 
                 .then(data => {
                     localStorage.setItem('userInfo', data)
-                    localStorage.setItem('', userInfo.token)
                     this.$emit('user-signup', true)
                 })
-
             }
         }
     }

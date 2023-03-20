@@ -1,5 +1,5 @@
 <template>
-    <div class="login" id="login">
+    <div class="login" id="login" >
         <div class="logForm">
             <Login :user-login="userLogin"></Login>
         </div>
@@ -24,7 +24,8 @@ export default {
         return {
             email: '',
             password: '',
-            fullName: ''
+            fullName: '',
+            id: ''
         }
     },
     methods: {
@@ -47,7 +48,7 @@ export default {
             }
         },
         signup() {
-                if(this.input.email != "" && this.input.password != "" && this.input.fullName != "" && this.input.id != "") {
+                if(this.input.email != "" && this.input.password != "" && this.input.fullName != "") {
                     if(this.input.email == this.$parent.mockAccount.email && this.input.password == this.$parent.mockAccount.password && this.input.fullName == this.$parent.mockAccount.fullName) {
                     } else {
                         console.log("Email/Pasword incorrect")
@@ -60,15 +61,17 @@ export default {
             this.users.unshift({
             email: this.email,
             password: this.password,
-            fullName: this.fullName
+            fullName: this.fullName,
+            id: this.id
         })
             this.email = ''
             this.password = ''
             this.fullName = ''
+            this.id = ''
         },
         submit: function (event) {
             let userInfo =[];
-            localStorage.setItem(userInfo, JSON.stringify(User));
+            localStorage.getItem(userInfo, JSON.stringify("User"));
             if (!form.checkValidity()) {
                 event.stopPropagation()
             }
@@ -90,6 +93,7 @@ export default {
 		            'Content-Type': 'application/json'
 	            },
 	            body: JSON.stringify({
+                    id: this.id,
 		            name: this.fullName,
                     password: this.password,
                     email: this.email

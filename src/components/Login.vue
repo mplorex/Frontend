@@ -57,7 +57,8 @@ export default {
                     body: JSON.stringify({
                         email: this.email,
                         password: this.password,
-                        fullName: this.fullName
+                        fullName: this.fullName,
+                        id: this.id
 
                     })
                 })
@@ -69,6 +70,7 @@ export default {
                 .then(data => {
                     localStorage.setItem('userInfo', data)
                     this.$emit('user-login', true)
+                    this.$emit('data-id', true)
                 })
             }
         }
