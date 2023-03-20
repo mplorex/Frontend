@@ -71,7 +71,7 @@ export default {
         },
         submit: function (event) {
             let userInfo =[];
-            localStorage.getItem(userInfo, JSON.stringify("User"));
+            localStorage.setItem(userInfo, JSON.stringify(User));
             if (!form.checkValidity()) {
                 event.stopPropagation()
             }
