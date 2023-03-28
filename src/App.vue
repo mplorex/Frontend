@@ -1,7 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
   <div class="app">
     <header>
@@ -16,7 +12,10 @@ import { RouterLink, RouterView } from "vue-router";
       <div class="wrapper">
         <nav>
           <div class="routerLink"><RouterLink to="/">Home</RouterLink></div>
-          <div class="routerLink"><RouterLink to="/LoginSignup" v-on:click.native="logout" replace>Login or Signup</RouterLink></div>
+          <div class="routerLink" v-if="!isAuth">
+            <RouterLink to="/Login">Login</RouterLink>
+            <RouterLink to="/Signup">Signup</RouterLink>
+          </div>
         </nav>
       </div>
     </header>
@@ -25,24 +24,15 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 
 <script>
+import { useUserStore } from './store/user'
+import { RouterLink, RouterView } from "vue-router";
+import { mapState } from 'pinia'
+
+
 export default {
   name: 'App',
-  data() {
-    return {
-      authenticated: false,
-      mockAccount: {
-        email: "",
-        password: ""
-      }
-    }
-  },
-  methods: {
-    setAuthenticated(status) {
-      this.authenticated = status;
-    },
-    logout() {
-      this.authenticated = false;
-    }
+  computed: {
+    ...mapState(useUserStore, ['isAuth'])
   }
 }
 </script>

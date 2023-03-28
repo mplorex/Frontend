@@ -1,5 +1,5 @@
 <template>
-    <form ref="form" @submit.prevent="createUser">
+    <form ref="form" @submit.prevent="userLogin">
         <h1>Sign in</h1>
         <div class="login_layout">
             <input
@@ -30,49 +30,26 @@
 </template>
 
 <script>
+import { useUserStore } from '../store/user'
+import { mapActions } from 'pinia'
+
 export default {
-    data () {
+    data () { 
         return {
             email: '',
-            password: '',
-            fullName: ''
-        }
+            password: ''
+        };
     },
-    methods: {
-        createUser () {
+    methods: { 
+        ...mapActions(useUserStore, ['login']),
+        userLogin() {
             if (this.$refs.form.checkValidity()) {
-                let userInfo = localStorage.getItem('userInfo')
-                if (userInfo) {
-                    userInfo = JSON.stringify(userInfo)
-                } else {
-                    return
-                }
-
-                fetch('http://localhost:3000/api/auth/login/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer' + userInfo.token
-                    },
-                    body: JSON.stringify({
-                        email: this.email,
-                        password: this.password,
-                        fullName: this.fullName,
-                        id: this.id
-
-                    })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                })
-                .then(data => {
-                    localStorage.setItem('userInfo', data)
+                this.login(this.email, this.password)
+                .then(() => {
                     this.$emit('user-login', true)
                 })
-            }
-        }
-    }
-}
+            };
+        },
+    },
+};
 </script>

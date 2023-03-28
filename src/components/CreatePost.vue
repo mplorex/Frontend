@@ -20,9 +20,8 @@
             />
             <input
             class="image"
-            type="image"
+            type="file"
             name="image"
-            v-model="image"
             placeholder="Image"
             />
             <button

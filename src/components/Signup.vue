@@ -4,11 +4,11 @@
         <div class="login_layout">
             <input
             class="field"
-            type="fullName"
-            name="fullName"
-            v-model="fullName"
+            type="name"
+            name="name"
+            v-model="name"
             required
-            placeholder="Full Name"
+            placeholder="Name"
             />
             <input
             class="field"
@@ -38,50 +38,27 @@
 </template>
 
 <script>
+import { useUserStore } from '@/store/user'
+import { mapActions } from 'pinia'
+
 export default {
-    data () {
+    data () { 
         return {
             email: '',
             password: '',
-            fullName: ''
-        }
+            name: ''
+        };
     },
-    methods: {
-        userSignup () {
+    methods: { 
+        ...mapActions(useUserStore, ['signup']),
+        userSignup() {
             if (this.$refs.form.checkValidity()) {
-                let userInfo = localStorage.getItem("userInfo")
-
-                if (userInfo) {
-                    userInfo = JSON.stringify(userInfo)
-                } else {
-                    return
-                }
-                fetch('http://localhost:3000/api/auth/signup/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer' + userInfo.token
-                    },
-                    body: JSON.stringify({
-                        email: this.email,
-                        password: this.password,
-                        fullName: this.fullName,
-                        id: this.id
-                    })
-                })
-
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                })
-
-                .then(data => {
-                    localStorage.setItem('userInfo', data)
+                this.signup(this.name, this.email, this.password)
+                .then(() => {
                     this.$emit('user-signup', true)
                 })
-            }
-        }
-    }
-}
+            };
+        },
+    },
+};
 </script>
