@@ -32,8 +32,7 @@ export default {
     title: '',
     body: '',
     image: '',
-    posts: [
-    ]
+    posts: []
   }),
   methods: {
     addPost (post) {

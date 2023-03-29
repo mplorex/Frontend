@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
+import SourceData from "../store/user.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,16 +11,34 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      beforeEnter(to, from){ 
+        const exists = SourceData.users.find(
+          user => user.id === parseInt(to.params.id)
+        )
+        if(!exists) return {name: 'Not Found!'}
+      }
     },
     {
-      path: "/login",
+      path: "/Login",
       name: "Login",
       component: Login,
+      beforeEnter(to, from){ 
+        const exists = SourceData.users.find(
+          user => user.id === parseInt(to.params.id)
+        )
+        if(!exists) return {}
+      }
     }, 
     {
-      path: "/signup",
+      path: "/Signup",
       name: "Signup",
       component: Signup,
+      beforeEnter(to, from){ 
+        const exists = SourceData.users.find(
+          user => user.id === parseInt(to.params.id)
+        )
+        if(!exists) return {name: 'Not Found!'}
+      }
     }
   ],
 });

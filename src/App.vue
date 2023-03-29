@@ -13,7 +13,7 @@
         <nav>
           <div class="routerLink"><RouterLink to="/">Home</RouterLink></div>
           <div class="routerLink" v-if="!isAuth">
-            <RouterLink to="/Login">Login</RouterLink>
+            <RouterLink to="/Login" >Login</RouterLink>
             <RouterLink to="/Signup">Signup</RouterLink>
           </div>
         </nav>
