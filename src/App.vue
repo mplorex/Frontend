@@ -16,6 +16,7 @@
             <RouterLink to="/Login" >Login</RouterLink>
             <RouterLink to="/Signup">Signup</RouterLink>
           </div>
+          <div class="routerLink"><button @click="authStore.logout()" class="btn btn-link nav-item nav-link">Logout</button></div>
         </nav>
       </div>
     </header>

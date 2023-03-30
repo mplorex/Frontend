@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
-import SourceData from "../store/user.js";
+import { useUserStore } from '../store/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +12,7 @@ const router = createRouter({
       name: "home",
       component: HomeView,
       beforeEnter(to, from){ 
-        const exists = SourceData.users.find(
+        const exists = useUserStore.users.find(
           user => user.id === parseInt(to.params.id)
         )
         if(!exists) return {name: 'Not Found!'}
@@ -23,7 +23,7 @@ const router = createRouter({
       name: "Login",
       component: Login,
       beforeEnter(to, from){ 
-        const exists = SourceData.users.find(
+        const exists = useUserStore.users.find(
           user => user.id === parseInt(to.params.id)
         )
         if(!exists) return {}
@@ -34,7 +34,7 @@ const router = createRouter({
       name: "Signup",
       component: Signup,
       beforeEnter(to, from){ 
-        const exists = SourceData.users.find(
+        const exists = useUserStore.users.find(
           user => user.id === parseInt(to.params.id)
         )
         if(!exists) return {name: 'Not Found!'}

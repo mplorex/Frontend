@@ -63,5 +63,24 @@ export const useUserStore = defineStore('user', {
                 console.log(error)
                 return error
             }
+        },
+        logout() {
+            this.user = null;
+            localStorage.removeItem('user');
+            router.push('/account/login');
+        },
+        async delete(id) {
+            this.users.find(x => x.id === id).isDeleting = true;
+
+            await fetchWrapper.delete(`${baseUrl}/${id}`);
+
+            this.users = this.users.filter(x => x.id !== id);
+
+            const useStore = useUserStore();
+            if (id === useStore.user.id) {
+                useStore.logout();
+            }
         }
-    }})
+    }
+
+})
