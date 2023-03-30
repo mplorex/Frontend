@@ -22,23 +22,11 @@ const router = createRouter({
       path: "/Login",
       name: "Login",
       component: Login,
-      beforeEnter(to, from){ 
-        const exists = useUserStore.users.find(
-          user => user.id === parseInt(to.params.id)
-        )
-        if(!exists) return {}
-      }
     }, 
     {
       path: "/Signup",
       name: "Signup",
       component: Signup,
-      beforeEnter(to, from){ 
-        const exists = useUserStore.users.find(
-          user => user.id === parseInt(to.params.id)
-        )
-        if(!exists) return {name: 'Not Found!'}
-      }
     }
   ],
 });
