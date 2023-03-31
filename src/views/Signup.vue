@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         userSignup() {
-            this.$router.push("/")
+            this.$router.push("/Login")
         }
     }
 };
