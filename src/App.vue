@@ -13,10 +13,10 @@
         <nav>
           <div class="routerLink"><RouterLink to="/">Home</RouterLink></div>
           <div class="routerLink" v-if="!isAuth">
-            <RouterLink to="/Login" >Login</RouterLink>
-            <RouterLink to="/Signup">Signup</RouterLink>
+            <RouterLink to="/login" >Login</RouterLink>
+            <RouterLink to="/signup">Signup</RouterLink>
           </div>
-          <div class="routerLink"><button @click="authStore.logout()" class="btn btn-link nav-item nav-link">Logout</button></div>
+          <div v-else class="routerLink"><a href="#" @click="userLogout">Logout</a></div>
         </nav>
       </div>
     </header>
@@ -27,13 +27,20 @@
 <script>
 import { useUserStore } from './store/user'
 import { RouterLink, RouterView } from "vue-router";
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 
 
 export default {
   name: 'App',
   computed: {
     ...mapState(useUserStore, ['isAuth'])
+  },
+  methods: {
+    ...mapActions(useUserStore, ['logout']),
+    userLogout() {
+      this.logout()
+      this.$router.push('/login')
+    }
   }
 }
 </script>

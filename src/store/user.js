@@ -66,8 +66,7 @@ export const useUserStore = defineStore('user', {
         },
         logout() {
             this.user = null;
-            localStorage.removeItem('user');
-            router.push('/account/login');
+            localStorage.removeItem('userInfo');
         },
         async delete(id) {
             this.users.find(x => x.id === id).isDeleting = true;

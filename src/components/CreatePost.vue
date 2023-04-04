@@ -34,6 +34,10 @@
     </form>
 </template>
 <script>
+
+import { useUserStore } from '@/store/user'
+import { mapState } from 'pinia'
+
 export default {
     data () {
         return {
@@ -42,22 +46,19 @@ export default {
             image: ''
         }
     },
+    computed: {
+        ...mapState(useUserStore, ['user']) 
+    },
     methods: {
         createPost () {
             if (this.$refs.form.checkValidity()) {
-                let userInfo = localStorage.getItem('userInfo')
-                if (userInfo) {
-                    userInfo = JSON.stringify(userInfo)
-                } else {
-                    return
-                }
                 
                 const formData = new FormData(this.$refs.form)
 
                 fetch('http://localhost:3000/api/posts/', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer' + userInfo.token
+                        'Authorization': this.user.token
                     },
                     body: formData
                 })

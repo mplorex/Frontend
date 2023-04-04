@@ -12,21 +12,31 @@ const router = createRouter({
       name: "home",
       component: HomeView,
       beforeEnter(to, from){ 
-        const exists = useUserStore.users.find(
-          user => user.id === parseInt(to.params.id)
-        )
-        if(!exists) return {name: 'Not Found!'}
-      }
+        const store = useUserStore()
+
+        if (to.meta.requiresAuth && !store.isAuth) return '/login'
+      },
+      meta: { requiresAuth: true }
     },
     {
-      path: "/Login",
+      path: "/login",
       name: "Login",
       component: Login,
+      beforeEnter(to, from){ 
+        const store = useUserStore()
+
+        if (store.isAuth) return '/'
+      }
     }, 
     {
-      path: "/Signup",
+      path: "/signup",
       name: "Signup",
       component: Signup,
+      beforeEnter(to, from){ 
+        const store = useUserStore()
+
+        if (store.isAuth) return '/'
+      }
     }
   ],
 });
