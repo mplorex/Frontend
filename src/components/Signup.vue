@@ -1,5 +1,5 @@
 <template>
-    <form ref="form" @submit.prevent="userSignup">
+    <form ref="form" @submit.prevent="userSignup" class="log">
         <h1>Sign up</h1>
         <div class="login_layout">
             <input

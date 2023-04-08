@@ -53,10 +53,10 @@ header {
   width: 100%;
   z-index: var(--z-fixed);
 }
-.postForm, .loginForm {
+.postForm {
   padding: 15px;
 } 
-.postForm, .loginForm {
+.postForm {
   display: flex;
   flex-flow: wrap;
   width: 330px;
@@ -71,7 +71,7 @@ header {
   margin-top: 25px;
   width: 370px;
 }
-.form, .postForm, .loginForm {
+.form, .postForm {
   border: bisque 1px transparent;
   box-shadow: 0 0px 0px 0 rgba(255, 112, 112, 0.884), 0 3px 12px 0 rgb(255, 99, 99);
   border-radius: 10px;
