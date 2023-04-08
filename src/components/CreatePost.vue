@@ -35,19 +35,14 @@
 </template>
 <script>
 
-import { useUserStore } from '@/store/user'
-import { mapState } from 'pinia'
-
 export default {
     data () {
         return {
             title: '',
             description: '',
-            image: ''
+            image: '',
+            token: ''
         }
-    },
-    computed: {
-        ...mapState(useUserStore, ['user']) 
     },
     methods: {
         createPost () {
@@ -56,18 +51,12 @@ export default {
                 const formData = new FormData(this.$refs.form)
 
                 fetch('http://localhost:3000/api/posts/', {
-                    method: 'POST',
+                    method: "POST",
                     headers: {
-                        'Authorization': this.user.token
+                        "Authorization": 'Bearer' + token,
                     },
                     body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                })
-                .then(post => {
+                }).then(post => {
                     this.$emit('post', post)
                 })
             }
