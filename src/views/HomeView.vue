@@ -11,6 +11,7 @@
         :title="post.title"
         :body="post.description"
         :image="post.image"
+        :token="post.token"
       />
     </div>
   </div>
@@ -32,6 +33,7 @@ export default {
     title: '',
     body: '',
     image: '',
+    token: '',
     posts: []
   }),
   methods: {

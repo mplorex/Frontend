@@ -53,9 +53,11 @@ export default {
                 fetch('http://localhost:3000/api/posts/', {
                     method: "POST",
                     headers: {
-                        "Authorization": 'Bearer' + token,
+                        'Authorization': 'Bearer '+ this.token,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json;charset=utf-8'
                     },
-                    body: formData
+                    body: JSON.stringify(formData)
                 }).then(post => {
                     this.$emit('post', post)
                 })
