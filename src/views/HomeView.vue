@@ -27,6 +27,7 @@ export default {
   components:{
     CreatePost,
     Login,
+    Post
   },
   
   data: () => ({
@@ -34,11 +35,11 @@ export default {
     body: '',
     image: '',
     token: '',
-    posts: []
+    posts: ['a', 'b', 'c']
   }),
   methods: {
-    addPost (post) {
-      this.posts.unshift(posts)
+    addPost() {
+      this.post.unshift(posts)
     }
   }
 }
@@ -72,6 +73,7 @@ header {
   margin: auto;
   margin-top: 25px;
   width: 370px;
+  height: 200px;
 }
 .form, .postForm {
   border: bisque 1px transparent;

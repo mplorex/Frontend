@@ -6,7 +6,6 @@
             class="field"
             type="title"
             name="title"
-            v-model="title"
             required
             placeholder="Title"
             />
@@ -14,14 +13,13 @@
             class="field"
             type="description"
             name="description"
-            v-model="description"
             required
             placeholder="Description"
             />
             <input
             class="image"
             type="file"
-            name="image"
+            name="file"
             placeholder="Image"
             />
             <button
@@ -35,14 +33,13 @@
 </template>
 <script>
 
+import {mapState} from 'pinia'
+import {useUserStore} from '../store/user'
+
 export default {
-    data () {
-        return {
-            title: '',
-            description: '',
-            image: '',
-            token: ''
-        }
+    computed: {
+        ...mapState (useUserStore, ['user']), 
+
     },
     methods: {
         createPost () {
@@ -53,11 +50,9 @@ export default {
                 fetch('http://localhost:3000/api/posts/', {
                     method: "POST",
                     headers: {
-                        'Authorization': 'Bearer '+ this.token,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=utf-8'
+                        'Authorization': 'Bearer '+ this.user.token
                     },
-                    body: JSON.stringify(formData)
+                    body: formData
                 }).then(post => {
                     this.$emit('post', post)
                 })

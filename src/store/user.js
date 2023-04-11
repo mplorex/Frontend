@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', {
     actions: {
         async signup (name, email, password, token) {
             try {
-                const response = await fetch('http://localhost:3000/api/auth/signup/', {
+                const response = await fetch('http://localhost:3000/api/auth/signup', {
 		        method: 'POST', 
 		        headers: {
 		            'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const useUserStore = defineStore('user', {
         },
         async login ( email, password, token) {
             try {
-                const response = await fetch('http://localhost:3000/api/auth/login/', {
+                const response = await fetch('http://localhost:3000/api/auth/login', {
 		        method: 'POST', 
 		        headers: {
 		            'Content-Type': 'application/json',
@@ -69,19 +69,6 @@ export const useUserStore = defineStore('user', {
         logout() {
             this.user = null;
             localStorage.removeItem('userInfo');
-        },
-        async delete(id) {
-            this.users.find(x => x.id === id).isDeleting = true;
-
-            await fetchWrapper.delete(`${baseUrl}/${id}`);
-
-            this.users = this.users.filter(x => x.id !== id);
-
-            const useStore = useUserStore();
-            if (id === useStore.user.id) {
-                useStore.logout();
-            }
         }
     }
-
 })

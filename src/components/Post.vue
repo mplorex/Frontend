@@ -1,8 +1,8 @@
 <template>
 <div class="Post">
-    <div class="form_tx1"><h3>{{ title }}</h3></div>
-    <div class="form_tx2"><p>{{ body }}</p></div>   
-    <div class="form_tx2"><p>{{ image }}</p></div>   
+    <div class="form_tx1"><h3>test title</h3></div>
+    <!-- <div class="form_tx2"><p>{{ description }}</p></div>   
+    <div class="form_tx3">{{ imageUrl }}</div>    -->
 </div>
 </template>
 
@@ -10,8 +10,8 @@
 export default {
     props: {
         title: String,
-        body: String,
-        image: String
+        description: String,
+        imageUrl: String
     }
 }
 </script>
