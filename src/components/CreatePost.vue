@@ -6,6 +6,7 @@
             class="field"
             type="title"
             name="title"
+            v-model="title"
             required
             placeholder="Title"
             />
@@ -13,12 +14,14 @@
             class="field"
             type="description"
             name="description"
+            v-model="description"
             required
             placeholder="Description"
             />
             <input
             class="image"
             type="file"
+            :value="file"
             name="file"
             placeholder="Image"
             />
@@ -37,6 +40,13 @@ import {mapState} from 'pinia'
 import {useUserStore} from '../store/user'
 
 export default {
+    data () { 
+        return {
+            title: '',
+            description: '',
+            file: ''
+        };
+    },
     computed: {
         ...mapState (useUserStore, ['user']), 
 
@@ -54,7 +64,9 @@ export default {
                     },
                     body: formData
                 }).then(post => {
-                    this.$emit('post', post)
+                    const p = {title: this.title, description: this.description, file: this.file, token: this.user.token}
+                    console.log('data', p)
+                    this.$emit('addNew', p)
                 })
             }
         }

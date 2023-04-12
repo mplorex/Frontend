@@ -1,16 +1,16 @@
 <template>
   <div class="homeTemplate">
     <div class="appForm" id="form">
-      <CreatePost class="postForm"></CreatePost>
+      <CreatePost class="postForm" @add-new = "(p) => { posts.push(p)}"></CreatePost>
     </div>
     <div class="unreadPosts">
-      <div class="cPost" :post="addPost"></div>
+      <!-- <div class="cPost" :post="addPost"></div> -->
       <Post
         v-for="(post, index) in posts"
         :key="index"
         :title="post.title"
-        :body="post.description"
-        :image="post.image"
+        :description="post.description"
+        :file="post.file"
         :token="post.token"
       />
     </div>
@@ -30,16 +30,17 @@ export default {
     Post
   },
   
-  data: () => ({
-    title: '',
-    body: '',
-    image: '',
-    token: '',
-    posts: ['a', 'b', 'c']
+  data: (post) => ({
+    posts: [{
+      title: post.title, 
+      description: post.description, 
+      file: post.file
+    }]
   }),
   methods: {
-    addPost() {
-      this.post.unshift(posts)
+    addPost(post) {
+      console.log('post', post)
+      this.posts.push(post)
     }
   }
 }

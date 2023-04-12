@@ -1,8 +1,8 @@
 <template>
 <div class="Post">
-    <div class="form_tx1"><h3>test title</h3></div>
-    <!-- <div class="form_tx2"><p>{{ description }}</p></div>   
-    <div class="form_tx3">{{ imageUrl }}</div>    -->
+    <div class="form_tx1"><h3>{{ title }}</h3></div>
+    <div class="form_tx2"><p>{{ description }}</p></div>   
+    <div class="form_tx3">{{ file }}</div>    
 </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     props: {
         title: String,
         description: String,
-        imageUrl: String
+        file: String
     }
 }
 </script>
@@ -21,9 +21,9 @@ export default {
     text-align: center;
     color: black;
 }
-.form_tx2{
+.form_tx2, .form_tx3{
     font-size: 20px;
     text-align: center;
-    color: darkgreen;
+    color: #006400;
 }
 </style>

@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', {
 		        method: 'POST', 
 		        headers: {
 		            'Content-Type': 'application/json',
-                    'Authorization': this.token,
+                    'Authorization': this.user.token,
 	            },
 	            body: JSON.stringify({
 		            email,
@@ -47,7 +47,7 @@ export const useUserStore = defineStore('user', {
 		        method: 'POST', 
 		        headers: {
 		            'Content-Type': 'application/json',
-                    'Authorization': this.token,
+                    'Authorization': this.user.token,
 	            },
 	            body: JSON.stringify({
 		            email,
