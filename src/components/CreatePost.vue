@@ -1,6 +1,6 @@
 <template>
     <form ref="form" @submit.prevent="createPost" class="postForm">
-        <h1>Create a post!</h1>
+        <div class="postTitle"><h1>Create a post!</h1></div>
         <div class="post_layout">
             <input
             class="field"
@@ -67,3 +67,15 @@ export default {
     }
 }
 </script>
+
+<style>
+.postTitle{
+    margin: 0px 0px -30px 10px;
+}
+.post_layout {
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+}
+
+</style>

@@ -67,8 +67,6 @@ header {
   flex-flow: wrap;
   margin: auto;
   margin-top: 25px;
-  width: 370px;
-  height: 200px;
 }
 .imagePreviewWrapper {
     width: 200px;
