@@ -15,19 +15,17 @@ export const useUserStore = defineStore('user', {
         isAuth: (state) => !! state.user
     },
     actions: {
-        async signup (name, email, password, token) {
+        async signup (name, email, password) {
             try {
                 const response = await fetch('http://localhost:3000/api/auth/signup', {
 		        method: 'POST', 
 		        headers: {
-		            'Content-Type': 'application/json',
-                    'Authorization': this.user.token,
+		            'Content-Type': 'application/json'
 	            },
 	            body: JSON.stringify({
 		            email,
                     name,
-                    password,
-                    token
+                    password
 	            }),
             })
 
@@ -41,25 +39,23 @@ export const useUserStore = defineStore('user', {
                 return error
             }
         },
-        async login ( email, password, token) {
+        async login ( email, password) {
             try {
                 const response = await fetch('http://localhost:3000/api/auth/login', {
 		        method: 'POST', 
 		        headers: {
-		            'Content-Type': 'application/json',
-                    'Authorization': this.user.token,
+		            'Content-Type': 'application/json'
 	            },
 	            body: JSON.stringify({
 		            email,
-                    password,
-                    token
+                    password
 	            }),
             })
-
+            if (response.ok) {           
             const data = await response.json(); 
             localStorage.setItem("userInfo", JSON.stringify(data));
             this.user = data;
-            return data;
+            }
 
             }catch (error) {
                 console.log(error)

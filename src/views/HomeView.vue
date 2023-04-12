@@ -1,22 +1,16 @@
 <template>
   <div class="homeTemplate">
     <div class="appForm" id="form">
-      <CreatePost class="postForm" @add-new = "(p) => { posts.push(p)}"></CreatePost>
+      <CreatePost class="postForm" @add-new="addPost"></CreatePost>
     </div>
     <div class="unreadPosts">
-      <!-- <div class="cPost" :post="addPost"></div> -->
       <Post
         v-for="(post, index) in posts"
         :key="index"
         :title="post.title"
         :description="post.description"
-        :image="post.image"
-        :token="post.token"
-      >
-        <div class="imagePreviewWrapper"
-          :style="{ 'background-image': `url(${previewImage})` }" @click="selectImage">
-        </div>
-      </Post>
+        :imageUrl="post.imageUrl"
+      />
     </div>
   </div>
 </template>
@@ -35,11 +29,7 @@ export default {
   },
   
   data: (post) => ({
-    posts: [{
-      title: post.title, 
-      description: post.description, 
-      image: post.image
-    }]
+    posts: []
   }),
   methods: {
     addPost(post) {
