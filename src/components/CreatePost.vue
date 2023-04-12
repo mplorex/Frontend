@@ -20,9 +20,10 @@
             />
             <input
             class="image"
+            ref="fileInput"
             type="file"
-            :value="file"
-            name="file"
+            @input="pickFile"
+            name="image"
             placeholder="Image"
             />
             <button
@@ -44,7 +45,7 @@ export default {
         return {
             title: '',
             description: '',
-            file: ''
+            image: ''
         };
     },
     computed: {
@@ -52,6 +53,21 @@ export default {
 
     },
     methods: {
+        selectImage () {
+            this.$refs.fileInput.click()
+            },
+        pickFile () {
+            let input = this.$refs.fileInput
+            let file = input.files
+            if (file && file[0]) {
+            let reader = new FileReader
+            reader.onload = e => {
+            this.previewImage = e.target.result
+            }
+            reader.readAsDataURL(file[0])
+            this.$emit('input', file[0])
+            }
+        },
         createPost () {
             if (this.$refs.form.checkValidity()) {
                 
@@ -64,7 +80,7 @@ export default {
                     },
                     body: formData
                 }).then(post => {
-                    const p = {title: this.title, description: this.description, file: this.file, token: this.user.token}
+                    const p = {title: this.title, description: this.description, image: this.image, token: this.user.token}
                     console.log('data', p)
                     this.$emit('addNew', p)
                 })

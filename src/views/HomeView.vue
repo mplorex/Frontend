@@ -10,9 +10,13 @@
         :key="index"
         :title="post.title"
         :description="post.description"
-        :file="post.file"
+        :image="post.image"
         :token="post.token"
-      />
+      >
+        <div class="imagePreviewWrapper"
+          :style="{ 'background-image': `url(${previewImage})` }" @click="selectImage">
+        </div>
+      </Post>
     </div>
   </div>
 </template>
@@ -34,7 +38,7 @@ export default {
     posts: [{
       title: post.title, 
       description: post.description, 
-      file: post.file
+      image: post.image
     }]
   }),
   methods: {
@@ -75,6 +79,15 @@ header {
   margin-top: 25px;
   width: 370px;
   height: 200px;
+}
+.imagePreviewWrapper {
+    width: 200px;
+    height: 170px;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto 10px;
+    background-size: cover;
+    background-position: center center;
 }
 .form, .postForm {
   border: bisque 1px transparent;

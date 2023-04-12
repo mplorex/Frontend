@@ -2,7 +2,7 @@
 <div class="Post">
     <div class="form_tx1"><h3>{{ title }}</h3></div>
     <div class="form_tx2"><p>{{ description }}</p></div>   
-    <div class="form_tx3">{{ file }}</div>    
+    <div class="form_tx3">{{ image }}</div>    
 </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     props: {
         title: String,
         description: String,
-        file: String
+        image: String
     }
 }
 </script>
