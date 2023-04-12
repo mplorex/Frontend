@@ -2,16 +2,43 @@
 <div class="Post">
     <div class="form_tx1"><h3>{{ title }}</h3></div>
     <div class="form_tx2"><p>{{ description }}</p></div>   
-    <img class="form_tx3" :src="imageUrl" >    
+    <img class="form_tx3" :src="imageUrl" />
+    <strong v-if="isRead">Post read</strong>
+    <button @click="markRead">Mark read</button>    
 </div>
 </template>
 
 <script>
+import {mapState} from 'pinia'
 export default {
     props: {
         title: String,
         description: String,
         imageUrl: String
+    },
+    computed: {
+        ...mapState (useUserStore, ['user']), 
+    },
+    data() {
+        return {
+            isRead: false,
+        }
+    },
+    mounted () {
+        fetch('http://localhost:300/api/post' + this.user + '/read')
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+        })
+        .then(isRead => {
+            this.isRead = isRead
+        })
+    },
+    methods: {
+        markRead() {
+            this.isRead = true
+        }
     }
 }
 </script>
