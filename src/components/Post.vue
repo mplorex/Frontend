@@ -4,6 +4,7 @@
     <div class="form_tx2"><p>{{ description }}</p></div>   
     <img class="form_tx3" :src="imageUrl" />
     <div class="markRead">
+        <svg-icon type="mdi" :path="path"></svg-icon>
         <button @click="read = !read" class="pText">Mark read</button> 
         <div class="readText">
             <h1 v-if="read">Post has NOT been read</h1>   
@@ -14,13 +15,20 @@
 </template>
 
 <script>
-import {mapState} from 'pinia'
-import {useUserStore} from '../store/user'
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiThumbUp } from '@mdi/js';
+import {mapState} from 'pinia';
+import {useUserStore} from '../store/user';
 
 export default {
+    name: "my-component",
+    components: {
+        SvgIcon
+    },
     data() {
         return {
-            read: true
+            read: true,
+            path: mdiThumbUp
         }
     },
     props: {
