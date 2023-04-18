@@ -4,9 +4,9 @@
     <div class="form_tx2"><p>{{ description }}</p></div>   
     <img class="form_tx3" :src="imageUrl" />
     <div class="markRead">
-        <button @click="read = !read"><p class="pText">Mark read</p></button> 
+        <button @click="read = !read" class="pText">Mark read</button> 
         <div class="readText">
-            <h1 v-if="read">Post has not been read</h1>   
+            <h1 v-if="read">Post has NOT been read</h1>   
             <h1 v-else>Post has been read!</h1>
         </div>
     </div>
@@ -30,14 +30,6 @@ export default {
     },
     computed: {
         ...mapState (useUserStore, ['user']), 
-    },
-    mounted () {
-        fetch('http://localhost:3000/api/posts/')
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-        })
     }
 }
 </script>

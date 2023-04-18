@@ -36,7 +36,22 @@ export default {
       console.log('post', post)
       this.posts.push(post)
     }
-  }
+  },
+  computed: {
+        ...mapState (useUserStore, ['user']), 
+  },
+  mounted () {
+        fetch('http://localhost:3000/api/posts/' , {
+          headers: {
+                      'Authorization': 'Bearer '+ this.user.token
+                    }
+        }) 
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+        })
+    }
 }
 </script>
 
