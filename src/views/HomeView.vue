@@ -19,6 +19,8 @@
 import Post from '../components/Post.vue';
 import CreatePost from '../components/CreatePost.vue';
 import Login from '../components/Login.vue';
+import {mapState} from 'pinia'
+import {useUserStore} from '../store/user'
 
 export default {
   name: 'App',
