@@ -4,7 +4,7 @@
     <div class="form_tx2"><p>{{ description }}</p></div>   
     <img class="form_tx3" :src="imageUrl" />
     <div class="markRead">
-        <svg-icon type="mdi" :path="path"></svg-icon>
+        <div class="likeIcon"><button><svg-icon type="mdi" :path="path"></svg-icon></button></div>
         <button @click="read = !read" class="pText">Mark read</button> 
         <div class="readText">
             <h1 v-if="read">Post has NOT been read</h1>   
@@ -74,7 +74,11 @@ export default {
     margin: auto;
     padding: 5px;
 }
+.pText, .likeIcon {
+    padding: 5px;
+}
 .readText {
     font-size: 10px;
+    padding: 5px;
 }
 </style>
