@@ -5,9 +5,9 @@
         <img
         alt="Vue logo"
         class="logo"
-        src="@/assets/logo.svg"
-        width="75"
-        height="75"
+        src="./images/groupomania.png"
+        width="200"
+        height="40"
         /></div>
       <div class="wrapper">
         <nav>
