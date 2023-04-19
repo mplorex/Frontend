@@ -1,8 +1,20 @@
 <template>
 <div class="Post">
-    <div class="form_tx1"><h3>{{ title }}</h3></div>
-    <div class="form_tx2"><p>{{ description }}</p></div>   
-    <img class="form_tx3" :src="imageUrl" />
+    <div class="form_tx1"><h3> Rate my post</h3></div>
+    <div class="form_tx2"><p> Excited to be joining Groupomania's network!</p></div>
+    <img src="../images/hawaii.jpg"/>   
+    <div class="markRead">
+        <div class="likeIcon"><button><svg-icon type="mdi" :path="path"></svg-icon></button></div>
+        <div class="readText">
+            <h1 v-if="read">Post has NOT been read</h1>   
+            <h1 v-else>Post has been read!</h1>
+        </div>
+        <button @click="read = !read" class="pText">Mark read</button> 
+    </div>
+</div>
+<div class="Post">
+    <div class="form_tx1"><h3> My coworkers</h3></div>
+    <div class="form_tx2"><p> Groupomania has allowed me to connect with coworkers in a safe and exclusive environment. Thank you for bringing this platform to us and see you at work!</p></div>   
     <div class="markRead">
         <div class="likeIcon"><button><svg-icon type="mdi" :path="path"></svg-icon></button></div>
         <div class="readText">
@@ -17,8 +29,6 @@
 <script>
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiThumbUp } from '@mdi/js';
-import {mapState} from 'pinia';
-import {useUserStore} from '../store/user';
 
 export default {
     name: "my-component",
@@ -30,17 +40,10 @@ export default {
             read: true,
             path: mdiThumbUp
         }
-    },
-    props: {
-        title: String,
-        description: String,
-        imageUrl: String
-    },
-    computed: {
-        ...mapState (useUserStore, ['user']), 
     }
 }
 </script>
+
 <style>
 .form_tx1{
     font-size: 30px;

@@ -4,6 +4,7 @@
       <CreatePost class="postForm" @add-new="addPost"></CreatePost>
     </div>
     <div class="unreadPosts">
+      <UserPost/>
       <Post
         v-for="(post, index) in posts"
         :key="index"
@@ -19,6 +20,7 @@
 import Post from '../components/Post.vue';
 import CreatePost from '../components/CreatePost.vue';
 import Login from '../components/Login.vue';
+import UserPost from '../components/UserPost.vue';
 import {mapState} from 'pinia'
 import {useUserStore} from '../store/user'
 
@@ -27,7 +29,8 @@ export default {
   components:{
     CreatePost,
     Login,
-    Post
+    Post,
+    UserPost
   },
   
   data: (post) => ({
