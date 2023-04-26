@@ -5,6 +5,7 @@
     </div>
     <div class="unreadPosts">
       <UserPost/>
+      <UserPosts/>
       <Post
         v-for="(post, index) in posts"
         :key="index"
@@ -21,8 +22,9 @@ import Post from '../components/Post.vue';
 import CreatePost from '../components/CreatePost.vue';
 import Login from '../components/Login.vue';
 import UserPost from '../components/UserPost.vue';
-import {mapState} from 'pinia'
-import {useUserStore} from '../store/user'
+import UserPosts from '../components/UserPosts.vue';
+import {mapState} from 'pinia';
+import {useUserStore} from '../store/user';
 
 export default {
   name: 'App',
@@ -30,7 +32,8 @@ export default {
     CreatePost,
     Login,
     Post,
-    UserPost
+    UserPost,
+    UserPosts
   },
   
   data: (post) => ({
@@ -42,8 +45,27 @@ export default {
       this.posts.push(post)
     }
   },
+  mutations: {
+    POSTS: function(state, posts) {
+      state.posts = posts;
+    }
+  },
   computed: {
         ...mapState (useUserStore, ['user']), 
+  },
+  actions: {
+    getAllPosts({ commit }) {
+      return new Promise((resolve, reject) => {
+        instance.get('posts')
+        .then(function(response) {
+          commit('POST', response.data);
+          resolve(response);
+        })
+        .catch(function(error) {
+          reject(error);
+        });
+      });
+    }
   },
   mounted () {
         fetch('http://localhost:3000/api/posts/' , {
