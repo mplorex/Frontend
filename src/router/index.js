@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
+import Account from "../components/Account.vue"
 import { useUserStore } from '../store/user'
 
 const router = createRouter({
@@ -37,6 +38,11 @@ const router = createRouter({
 
         if (store.isAuth) return '/'
       }
+    },
+    {
+      path: "/account",
+      name: "Account",
+      component: Account
     }
   ],
 });

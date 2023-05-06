@@ -12,6 +12,7 @@
       <div class="wrapper">
         <nav>
           <div class="routerLink"><RouterLink to="/">Home</RouterLink></div>
+          <div class="routerLink"><RouterLink to="/account">Account</RouterLink></div>
           <div class="routerLink" v-if="!isAuth">
             <RouterLink to="/login" >Login</RouterLink>
             <RouterLink to="/signup">Signup</RouterLink>

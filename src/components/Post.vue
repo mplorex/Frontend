@@ -6,10 +6,10 @@
     <div class="markRead">
         <div class="likeIcon"><button><svg-icon type="mdi" :path="path"></svg-icon></button></div>
         <div class="readText">
-            <h1 v-if="read">Post has NOT been read</h1>   
+            <h1 v-if="!read">Post has NOT been read</h1>   
             <h1 v-else>Post has been read!</h1>
         </div>
-        <button @click="read = !read" class="pText">Mark read</button> 
+        <button @click="markRead" class="pText">Mark read</button> 
     </div>
 </div>
 </template>
@@ -27,17 +27,51 @@ export default {
     },
     data() {
         return {
-            read: true,
+            read: false,
             path: mdiThumbUp
         }
     },
     props: {
         title: String,
         description: String,
-        imageUrl: String
+        imageUrl: String,
+        postId: String
     },
     computed: {
         ...mapState (useUserStore, ['user']), 
+    },
+    methods: {
+        markRead() {
+            fetch('http://localhost:3000/api/read/' + this.postId , {
+                method: 'POST',
+                headers: {
+                        'Authorization': 'Bearer '+ this.user.token
+                    }
+            })
+            .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            })
+            .then(markRead => {
+                this.read = markRead
+            })
+        }
+    },
+    mounted() {
+        fetch('http://localhost:3000/api/read/' + this.postId , {
+                headers: {
+                        'Authorization': 'Bearer '+ this.user.token
+                    }
+            })
+            .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            })
+            .then(markRead => {
+                this.read = markRead
+            })
     }
 }
 </script>
